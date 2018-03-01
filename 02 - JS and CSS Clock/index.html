@@ -17,6 +17,15 @@
 
 
   <style>
+    .clock {
+      --rotate-second: 90;
+      --rotate-min: 90;
+      --rotate-hour: 90;
+      --transition-second: '';
+      --transition-min: '';
+      --transition-hour: '';
+    }
+
     html {
       background:#018DED url(http://unsplash.it/1500/1000?image=881&blur=50);
       background-size:cover;
@@ -73,6 +82,21 @@
       transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
     }
 
+    .hand.second-hand {
+      transform: rotate(calc(var(--rotate-second)*1deg));
+      transition: var(--transition-second);
+    }
+
+    .hand.min-hand {
+      transform: rotate(calc(var(--rotate-min)*1deg));
+      transition: var(--transition-min);
+    }
+
+    .hand.hour-hand {
+      transform: rotate(calc(var(--rotate-hour)*1deg));
+      transition: var(--transition-hour);
+    }
+
   </style>
 
   <script>
@@ -80,6 +104,7 @@
     const secondHand = document.querySelector('.second-hand');
     const minHand = document.querySelector('.min-hand');
     const hourHand = document.querySelector('.hour-hand');
+    const clock = document.querySelector('.clock');
 
     const getDegrees = (seconds, mins, hours) => 
       // Convert to degrees, and include 90deg shift to start at 12
@@ -94,28 +119,28 @@
           // hands jumping (going backwards to 12 instead of 
           // continuing forwards) every time they pass 12.
           if (secondsDegrees === 444) {
-              secondHand.style.transition = 'unset'
+              clock.style.setProperty('--transition-second','unset');
           }
           if (minDegrees === 444) {
-              minHand.style.transition = 'unset'
+              clock.style.setProperty('--transition-min','unset');
           }
           if (hourDegrees === 444) {
-              hourHand.style.transition = 'unset'
+              clock.style.setProperty('--transition-hour','unset');
           }
 
-          secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
-          minHand.style.transform = `rotate(${minDegrees}deg)`;
-          hourHand.style.transform = `rotate(${hourDegrees}deg)`;
+          clock.style.setProperty("--rotate-second",secondsDegrees);
+          clock.style.setProperty("--rotate-min",minDegrees);
+          clock.style.setProperty("--rotate-hour",hourDegrees);
 
           // Start transition again after passing 12
           if (secondsDegrees === 96) {
-              secondHand.style.transition = ''
+              clock.style.setProperty('--transition-second','');
           }
           if (minDegrees === 96) {
-              minHand.style.transition = ''
+              clock.style.setProperty('--transition-min','');
           }
           if (hourDegrees === 96) {
-              hourHand.style.transition = ''
+              clock.style.setProperty('--transition-hour','');
           }
     }
     
