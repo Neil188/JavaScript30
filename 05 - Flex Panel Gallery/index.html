@@ -21,9 +21,11 @@
       box-sizing: inherit;
     }
 
+    /* set .panels to use flexbox */ 
     .panels {
       min-height:100vh;
       overflow: hidden;
+      display: flex;
     }
 
     .panel {
@@ -41,6 +43,17 @@
       font-size: 20px;
       background-size:cover;
       background-position:center;
+      /* Set each flex panel to evenly distribute across the containing flex element */
+      flex: 1;
+      /* Centre content along main axis (horizontally) */
+      justify-content: center;
+      align-items: center;
+      /* Set panel as a flex container (so it is a flex child and a flex container */
+      display: flex;
+      /* Set the flex main axis to column (vertical) 
+        The panels contents will then be vetically arranged.
+      */
+      flex-direction: column;
     }
 
 
@@ -50,10 +63,34 @@
     .panel4 { background-image:url(https://source.unsplash.com/ITjiVXcwVng/1500x1500); }
     .panel5 { background-image:url(https://source.unsplash.com/3MNzGlQM7qs/1500x1500); }
 
+    /* Flex items */
     .panel > * {
       margin:0;
       width: 100%;
       transition:transform 0.5s;
+      flex: 1 0 auto;
+      /* Another nested flexbox */
+      display: flex;
+      /* Make sure contents are centred within the panel */
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Within each panel, hide the first and last child by translating them off screen
+      then when the open-active panel is added move first/last child back on screen
+      transition transform property above will result in the text sliding into position
+    */
+    .panel > *:first-child {
+      transform: translateY(-100%);
+    }
+    .panel.open-active > *:first-child {
+      transform: translateY(0);
+    }
+    .panel > *:last-child {
+      transform: translateY(100%);
+    }
+    .panel.open-active > *:last-child {
+      transform: translateY(0);
     }
 
     .panel p {
@@ -68,6 +105,10 @@
 
     .panel.open {
       font-size:40px;
+      /* When the open class is added, grow the panel by giving it 
+      5x the amount of allocated space 
+      */
+      flex: 5;
     }
 
   </style>
@@ -102,6 +143,29 @@
   </div>
 
   <script>
+    const panels = document.querySelectorAll(".panel");
+    
+    function toggleOpen() {
+      this.classList.toggle('open');
+    }
+
+    // the transitionend event will trigger for every transition
+    // so we need to check which transition has ended
+    // the event properyName holds the name of the transition
+    // note not all browsers report this as 'flex-grow', Safari returns 'flex'
+    // so check to see if property name includes flex, instead of equals 'flex-grow'
+    function toggleActive(e) {
+      e.propertyName.includes('flex') && 
+        this.classList.toggle('open-active');
+    }
+
+    // on click toggle the open class, which grows the flex panel
+    panels.forEach( panel =>
+          panel.addEventListener('click', toggleOpen));
+    // Once the grow transition finishes toggle the open-active class
+    // twhich causes the top and bottom text to transition in
+    panels.forEach( panel =>
+          panel.addEventListener('transitionend', toggleActive));
 
   </script>
 
