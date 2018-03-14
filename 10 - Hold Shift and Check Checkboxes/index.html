@@ -99,17 +99,20 @@
 
     <script>
         let lastChecked;
+        let checkedOrUnchecked;
 
         const handleCheck = e => {
             let inBetween = false;
-            if (e.shiftKey && e.target.checked) {
+            checkedOrUnchecked = e.target.checked;
+            // if (e.shiftKey && e.target.checked) {
+            if (e.shiftKey) {
                 checkBoxes.forEach(
                     box => {
                         if (box === e.target || box === lastChecked) {
                             inBetween = !inBetween;
                         }
                         if (inBetween) {
-                            box.checked = true;
+                            box.checked = checkedOrUnchecked;
                         }
                     }
 
