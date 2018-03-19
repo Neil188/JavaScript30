@@ -7,6 +7,22 @@
 </head>
 <body>
     <script>
+        const pressed = [];
+        const secret = 'Gandalf';
+
+        const handleKeyUp = (e) => {
+            if (!/^\w$/.test(e.key))
+                return;
+
+            pressed.push(e.key);
+            (pressed.length > secret.length) && pressed.shift();
+
+            if (pressed.join('') === secret) {
+                console.log('You entered the secret key!!!');
+                cornify_add();
+            }
+        }
+        window.addEventListener('keyup', handleKeyUp);
     </script>
 </body>
 </html>
