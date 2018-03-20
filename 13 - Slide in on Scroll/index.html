@@ -84,8 +84,56 @@
       window.addEventListener('scroll', debounce(checkSlide));
     }
 
+    const handleIntersection = () => {
+
+      const sliderImages = document.querySelectorAll('.slide-in');
+
+      const handleIntersect = (entries, observer) => {
+        // when 10% or less visible remove active
+        // this moves image offscreen once we move away from it
+        // could use 0%, but this lets us see it in action on edge of screen
+        if (entries[0].intersectionRatio <= 0.1) {
+          entries[0].target.classList.remove('active');
+        }
+        // Once we've reached 50% of target add active class
+        if (entries[0].intersectionRatio >= 0.5) {
+          entries[0].target.classList.add('active');
+        }
+      };
+
+      const createObserver = ( image ) => {
+        let observer;
+        let options = {
+          // watch for changes relative to viewport, so root is null
+          root: null,
+          // no margin required to offset set to 0px
+          rootMargin: "0px",
+          // trigger intersections on 10% and 50%
+          threshold: [0.1,0.5],
+        }
+        const imageObserver = new IntersectionObserver(handleIntersect, options);
+        imageObserver.observe(image);
+      };
+
+      sliderImages.forEach( createObserver );
+      
+
+    }
+
+    // Wait for DOMContentLoaded event
     document.addEventListener('DOMContentLoaded', () => {
-      handleScrollEvents();
+      // Check if IntersectionObserver is supported
+      if ("IntersectionObserver" in window &&
+          "IntersectionObserverEntry" in window &&
+          "intersectionRatio" in window.IntersectionObserverEntry.prototype) 
+        { 
+          // Use Intersection observer
+          handleIntersection() 
+        } else {
+          // fallback to scroll events
+          handleScrollEvents();
+        }
+      
     });
 
   </script>
