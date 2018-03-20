@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>Day 13 - Slide in on Scroll</title>
 </head>
 <body>
 
@@ -43,27 +43,50 @@
   </div>
 
   <script>
-    function debounce(func, wait = 20, immediate = true) {
-      var timeout;
-      return function() {
-        var context = this, args = arguments;
-        var later = function() {
+    const debounce = (func, wait = 20, immediate = true) => {
+      let timeout;
+      return () => {
+        const later = () => {
           timeout = null;
-          if (!immediate) func.apply(context, args);
+          if (!immediate) func();
         };
-        var callNow = immediate && !timeout;
+        const callNow = immediate && !timeout;
         clearTimeout(timeout);
         timeout = setTimeout(later, wait);
-        if (callNow) func.apply(context, args);
+        if (callNow) func();
       };
     }
 
+    const sliderImages = document.querySelectorAll('.slide-in');
+
+    const checkSlide = () => {
+        const { scrollY, innerHeight } = window;
+        const bottomOfScreen = scrollY + innerHeight;
+        sliderImages.forEach( ({ height, offsetTop, classList }) => {
+            // slide in when half way down image -
+            //  bottom of screen - half image height
+            const slideInAt = bottomOfScreen - height / 2;
+            // get bottom of image
+            const imageBottom = offsetTop + height;
+            // is image half shown
+            const isHalfShown = slideInAt > offsetTop
+            // scrolled past image?
+            const isNotScrolledPast = scrollY < imageBottom;
+
+            (isHalfShown && isNotScrolledPast) ?
+                classList.add('active')
+            :   classList.remove('active');
+        })
+    };
+
+    window.addEventListener('scroll', debounce(checkSlide));
+    
   </script>
 
   <style>
     html {
       box-sizing: border-box;
-      background:#ffc600;
+      background:#425e4f;
       font-family:'helvetica neue';
       font-size: 20px;
       font-weight: 200;
