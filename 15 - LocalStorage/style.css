@@ -33,6 +33,10 @@
       margin: 0;
       font-weight: 200;
     }
+  
+    button {
+      margin-top: 10px;
+    }
 
     .plates {
       margin: 0;
