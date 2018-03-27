@@ -449,7 +449,7 @@ var ccv = {
 }
 
 onmessage = function (event) {
-	// if (event.data === "") {return}
+	if (event.data === "") {return}
 	var data = (typeof event.data == "string") ? JSON.parse(event.data) : event.data;
 	var scope = { "shared" : data.shared };
 	var result = parallable.core[data.name].apply(scope, [data.input, data.id, data.worker]);
