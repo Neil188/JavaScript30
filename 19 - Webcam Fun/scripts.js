@@ -38,6 +38,8 @@ paintToCanvas = () => {
         // update canvas using new pixels
         ctx.putImageData(pixels, 0, 0);
 
+        // now look for faces
+        detectFaces();
     }, 16 )
 };
 
@@ -108,6 +110,24 @@ takePhoto = () => {
     strip.insertBefore(link, strip.firstChild);
 }
 
+
+detectFaces = () => {
+    // detect all faces on canvas using ccv
+    const faces = [...ccv.detect_objects(
+        { "canvas" : (ccv.pre(canvas)), 
+                    "cascade" : cascade,
+                    "interval" : 5,
+                    "min_neighbors": 1 }
+        
+    )];
+
+    // draw rectangle around each detected face
+    faces.forEach( face => {
+        ctx.beginPath();
+        ctx.strokeRect(face.x, face.y, face.width, face.height);
+        ctx.closePath();
+    });
+}
 
 getVideo();
 // once video.play is called, and the video is ready the canplay event fires
