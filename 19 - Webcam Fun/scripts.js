@@ -3,6 +3,11 @@ const canvas = document.querySelector('.photo');
 const ctx = canvas.getContext('2d');
 const strip = document.querySelector('.strip');
 const snap = document.querySelector('.snap');
+const options = document.querySelector('.options');
+
+let opts = {
+    face: false,
+}
 
 getVideo = () => {
     navigator.mediaDevices.getUserMedia( {video: true, audio:false})
@@ -27,19 +32,15 @@ paintToCanvas = () => {
         // get the pixels from the image
         let pixels = ctx.getImageData(0, 0, width, height);
         // update pixels
-        // 1. give a red tint
-        // pixels = redEffect(pixels);
-        // 2. split rgb channels
-        // pixels = rgbSplit(pixels);
-        // 3. create ghoting effect, by allowing the previous ten frames to show through
-        // ctx.globalAlpha = 0.1;
-        // 4. Green screen effect
-        // pixels = greenScreen(pixels);
+        pixels = opts.redeffect ? redEffect(pixels)
+                : opts.rgbsplit ? rgbSplit(pixels)
+                : opts.greenscreen ? greenScreen(pixels)
+                : pixels;
         // update canvas using new pixels
         ctx.putImageData(pixels, 0, 0);
 
         // now look for faces
-        detectFaces();
+        opts.face && detectFaces();
     }, 16 )
 };
 
@@ -69,10 +70,9 @@ rgbSplit = (pixels) => {
 greenScreen = (pixels) => {
     const levels = {};
 
-    document.querySelectorAll('.rgb input').forEach((input) => {
+    document.querySelectorAll('.greenscreen input').forEach((input) => {
       levels[input.name] = input.value;
     });
-    // console.log(levels)
 
     for (i = 0; i < pixels.data.length; i = i + 4) {
       red = pixels.data[i + 0];
@@ -114,10 +114,11 @@ takePhoto = () => {
 detectFaces = () => {
     // detect all faces on canvas using ccv
     const faces = [...ccv.detect_objects(
-        { "canvas" : (ccv.pre(canvas)), 
-                    "cascade" : cascade,
-                    "interval" : 5,
-                    "min_neighbors": 1 }
+        {   "canvas" : (ccv.pre(canvas)), 
+            "cascade" : cascade,
+            "interval" : 5,
+            "min_neighbors": 1
+        }
         
     )];
 
@@ -129,6 +130,14 @@ detectFaces = () => {
     });
 }
 
+const handleOptionsChange = () => {
+    opts = { face: options.face.checked };
+    const currentEffect = options.effect.value;
+    opts[currentEffect] = true;
+}
+
 getVideo();
 // once video.play is called, and the video is ready the canplay event fires
 video.addEventListener('canplay', paintToCanvas);
+
+options.addEventListener('change', handleOptionsChange)
