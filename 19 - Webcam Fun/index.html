@@ -10,7 +10,21 @@
   <div class="photobooth">
     <div class="controls">
       <button onClick="takePhoto()">Take Photo</button>
-      <div class="rgb">
+      <form class="options">
+        <label for="face">Face detection</label>
+        <input type="checkbox" name="face" id="face">
+        <div>
+          <label for="noeffect">No effects:</label>
+          <input type="radio" name="effect" value="noeffect" id="noeffect" checked>
+          <label for="redeffect">Red Effect:</label>
+          <input type="radio" name="effect" value="redeffect" id="redeffect">
+          <label for="rgbsplit">RGB Split:</label>
+          <input type="radio" name="effect" value="rgbsplit" id="rgbsplit">
+          <label for="greenscreen">GreenScreen:</label>
+          <input type="radio" name="effect" value="greenscreen" id="greenscreen">
+        </div>
+      </form>
+      <div class="greenscreen">
         <label for="rmin">Red Min:</label>
         <input type="range" min=0 max=255 name="rmin">
         <label for="rmax">Red Max:</label>
