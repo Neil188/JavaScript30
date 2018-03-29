@@ -32,7 +32,7 @@ paintToCanvas = () => {
         // get the pixels from the image
         let pixels = ctx.getImageData(0, 0, width, height);
         // update pixels
-        pixels = opts.redeffect ? redEffect(pixels)
+        pixels.data = opts.redeffect ? redEffect(pixels)
                 : opts.rgbsplit ? rgbSplit(pixels)
                 : opts.greenscreen ? greenScreen(pixels)
                 : pixels;
@@ -44,41 +44,56 @@ paintToCanvas = () => {
     }, 16 )
 };
 
-redEffect = (pixels) => {
-    for (let i = 0; i < pixels.data.length; i+=4) {
+redEffect = ( {data} ) => {
+    const levels = {};
+    
+    document.querySelectorAll('.redeffect input').forEach((input) => {
+        levels[input.name] = Number(input.value);
+    });
+
+    for (let i = 0; i < data.length; i+=4) {
         // pixels[i] // r
         // pixels[i+1] // g
         // pixels[i+2] // b
         // pixels[i+3] // a
-        pixels.data[i + 0] = pixels.data[i + 0] + 100;
-        pixels.data[i + 1] = pixels.data[i + 1] - 50;
-        pixels.data[i + 2] = pixels.data[i + 2] * 0.5;
+        data[i + 0] = data[i + 0] + levels.red;
+        data[i + 1] = data[i + 1] + levels.green;
+        data[i + 2] = data[i + 2] + levels.blue;
     }
-    return pixels;
+    return data;
 };
 
-rgbSplit = (pixels) => {
-    for (let i = 0; i < pixels.data.length; i+=4) {
+rgbSplit = ( {data} ) => {
+    const levels = {};
+    const original = [...data];
+    
+    document.querySelectorAll('.rgbsplit input').forEach((input) => {
+        levels[input.name] = Number(input.value);
+    });
 
-        pixels.data[i - 150] = pixels.data[i + 0];
-        pixels.data[i + 400] = pixels.data[i + 1];
-        pixels.data[i - 450] = pixels.data[i + 2];
+    for (let i = 0; i < data.length; i+=4) {
+        // shift red
+        data[i + levels.red] = original[i + 0];
+        // shift green
+        data[i + 1 + levels.green] = original[i + 1];
+        // shift blue
+        data[i + 2 + levels.blue] = original[i + 2];
     }
-    return pixels;
+    return data;
 };
 
-greenScreen = (pixels) => {
+greenScreen = ( {data} ) => {
     const levels = {};
 
     document.querySelectorAll('.greenscreen input').forEach((input) => {
       levels[input.name] = input.value;
     });
 
-    for (i = 0; i < pixels.data.length; i = i + 4) {
-      red = pixels.data[i + 0];
-      green = pixels.data[i + 1];
-      blue = pixels.data[i + 2];
-      alpha = pixels.data[i + 3];
+    for (i = 0; i < data.length; i = i + 4) {
+      red = data[i + 0];
+      green = data[i + 1];
+      blue = data[i + 2];
+      alpha = data[i + 3];
 
       if (red >= levels.rmin
         && green >= levels.gmin
@@ -87,11 +102,11 @@ greenScreen = (pixels) => {
         && green <= levels.gmax
         && blue <= levels.bmax) {
         // take it out by setting transparency to 0
-        pixels.data[i + 3] = 0;
+        data[i + 3] = 0;
       }
     }
 
-    return pixels;
+    return data;
 }
 
 takePhoto = () => {
