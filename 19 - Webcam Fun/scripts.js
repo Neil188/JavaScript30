@@ -27,7 +27,7 @@ paintToCanvas = () => {
     const {videoWidth : width, videoHeight : height} = video;
     // reset canvas size to match video
     [canvas.width, canvas.height] = [width, height];
-    return setInterval( () => {
+    const paint = () => {
         ctx.drawImage(video, 0, 0, width, height);
         // get the pixels from the image
         let pixels = ctx.getImageData(0, 0, width, height);
@@ -41,7 +41,11 @@ paintToCanvas = () => {
 
         // now look for faces
         opts.face && detectFaces();
-    }, 16 )
+
+        requestAnimationFrame(paint);
+    };
+
+    requestAnimationFrame(paint);
 };
 
 redEffect = ( {data} ) => {
