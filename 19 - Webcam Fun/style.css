@@ -12,6 +12,7 @@ html {
 }
 
 .photobooth {
+  font-size: 1.6rem;
   max-width:150rem;
   margin: 2rem auto;
   border-radius:2px;
@@ -35,6 +36,33 @@ html {
   top:20px;
   right: 20px;
   width:200px;
+}
+
+.controls {
+  --greenscreenDisplay: none;
+  --rgbsplitDisplay: none;
+  --redeffectDisplay: none;
+}
+
+.controls button {
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+.controls input {
+  margin: 0 1rem 1.5rem 0;
+}
+
+.greenscreen {
+  display: var(--greenscreenDisplay);
+}
+
+.rgbsplit {
+  display: var(--rgbsplitDisplay);
+}
+
+.redeffect {
+  display: var(--redeffectDisplay);
 }
 
 /*

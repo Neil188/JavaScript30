@@ -150,8 +150,15 @@ detectFaces = () => {
 }
 
 const handleOptionsChange = () => {
+    const controls = document.querySelector('.controls');
     opts = { face: options.face.checked };
     const currentEffect = options.effect.value;
+    controls.style.setProperty('--greenscreenDisplay',
+        currentEffect === 'greenscreen' ? 'block' : 'none');
+    controls.style.setProperty('--rgbsplitDisplay',
+        currentEffect === 'rgbsplit' ? 'block' : 'none');
+    controls.style.setProperty('--redeffectDisplay',
+        currentEffect === 'redeffect' ? 'block' : 'none');
     opts[currentEffect] = true;
 }
 
