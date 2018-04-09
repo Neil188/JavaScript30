@@ -43,6 +43,10 @@ a {
   box-shadow: 0 0 10px rgba(0,0,0,0.2)
 }
 
+.highlight-hide {
+  display: none;
+}
+
 .menu {
   padding: 0;
   display: flex;
