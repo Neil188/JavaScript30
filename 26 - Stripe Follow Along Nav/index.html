@@ -26,49 +26,49 @@
         <ul class="dropdown courses">
           <li>
             <span class="code">RFB</span>
-            <a href="https://ReactForBeginners.com">React For Beginners</a>
+            <a tabindex="-1" href="https://ReactForBeginners.com">React For Beginners</a>
           </li>
           <li>
             <span class="code">ES6</span>
-            <a href="https://ES6.io">ES6 For Everyone</a>
+            <a tabindex="-1"  href="https://ES6.io">ES6 For Everyone</a>
           </li>
           <li>
             <span class="code">NODE</span>
-            <a href="https://LearnNode.com">Learn Node</a>
+            <a tabindex="-1"  href="https://LearnNode.com">Learn Node</a>
           </li>
           <li>
             <span class="code">STPU</span>
-            <a href="https://SublimeTextBook.com">Sublime Text Power User</a>
+            <a tabindex="-1"  href="https://SublimeTextBook.com">Sublime Text Power User</a>
           </li>
           <li>
             <span class="code">WTF</span>
-            <a href="http://Flexbox.io">What The Flexbox?!</a>
+            <a tabindex="-1"  href="http://Flexbox.io">What The Flexbox?!</a>
           </li>
           <li>
             <span class="code">GRID</span>
-            <a href="https://CSSGrid.io">CSS Grid</a>
+            <a tabindex="-1"  href="https://CSSGrid.io">CSS Grid</a>
           </li>
           <li>
             <span class="code">LRX</span>
-            <a href="http://LearnRedux.com">Learn Redux</a>
+            <a tabindex="-1"  href="http://LearnRedux.com">Learn Redux</a>
           </li>
           <li>
             <span class="code">CLPU</span>
-            <a href="http://CommandLinePowerUser.com">Command Line Power User</a>
+            <a tabindex="-1"  href="http://CommandLinePowerUser.com">Command Line Power User</a>
           </li>
           <li>
             <span class="code">MMD</span>
-            <a href="http://MasteringMarkdown.com">Mastering Markdown</a>
+            <a tabindex="-1"  href="http://MasteringMarkdown.com">Mastering Markdown</a>
           </li>
         </ul>
       </li>
       <li>
         <a href="#">Other Links</a>
         <ul class="dropdown dropdown3">
-          <li><a class="button" href="http://twitter.com/wesbos">Twitter</a></li>
-          <li><a class="button" href="http://facebook.com/wesbos.developer">Facebook</a></li>
-          <li><a class="button" href="http://wesbos.com">Blog</a></li>
-          <li><a class="button" href="http://wesbos.com/courses">Course Catalog</a></li>
+          <li><a tabindex="-1" class="button" href="http://twitter.com/wesbos">Twitter</a></li>
+          <li><a tabindex="-1" class="button" href="http://facebook.com/wesbos.developer">Facebook</a></li>
+          <li><a tabindex="-1" class="button" href="http://wesbos.com">Blog</a></li>
+          <li><a tabindex="-1" class="button" href="http://wesbos.com/courses">Course Catalog</a></li>
         </ul>
       </li>
     </ul>
@@ -221,6 +221,80 @@
 </style>
 
 <script>
+  // get all the links
+  const triggers = document.querySelectorAll('.cool > li'); 
+  const keyboardTriggers = document.querySelectorAll('.cool > li > a'); 
+  // Get the drop down
+  const background = document.querySelector('.dropdownBackground');
+  const nav = document.querySelector('.top');
+  let timeout;
+  let lastThis = null;
+
+  function handleEnter() {
+    // if we have a lastThis then call handleLeave to clear the 
+    // previous focus.  This happens when switching between keyboard and mouse 
+    !!lastThis && handleLeave();
+
+    this.classList.add('trigger-enter');
+    timeout = setTimeout( () => 
+       this.classList.contains('trigger-enter') &&
+       this.classList.add('trigger-enter-active')
+      ,150)
+    background.classList.add('open');
+
+    const dropdown = this.querySelector('.dropdown');
+    const dropdownCoords = dropdown.getBoundingClientRect();
+    const navCoords = nav.getBoundingClientRect();
+    
+    const coords = {
+      height: dropdownCoords.height,
+      width: dropdownCoords.width,
+      top: dropdownCoords.top - navCoords.top,
+      left: dropdownCoords.left - navCoords.left,
+    }
+    
+    background.style.setProperty('width', `${coords.width}px`);
+    background.style.setProperty('height', `${coords.height}px`);
+
+    background.style.setProperty(
+        'transform', 
+        `translate(${coords.left}px, ${coords.top}px)`
+        );
+    lastThis = this;
+  }
+
+  function handleLeave() {
+    clearTimeout(timeout);
+    lastThis.classList.remove('trigger-enter','trigger-enter-active');
+    background.classList.remove('open');
+    lastThis = null;
+  }
+
+  /*
+    For keyboard navigation, focus/blur will be triggered on the <a> elements
+    we need to call handleEnter/handleLeave with the parent <li> node as
+    'this'
+  */
+  function handleFocus() {
+    handleEnter.call(this.parentNode);
+  }
+
+  function handleBlur() {
+    handleLeave.call(this.parentNode);
+  }
+
+  // trigger on mouse enter and mouse leave on the links
+  triggers.forEach(trigger => 
+          trigger.addEventListener('mouseenter', handleEnter));
+  triggers.forEach(trigger => 
+          trigger.addEventListener('mouseleave', handleLeave));
+
+  // Handle keyboard navigation
+  keyboardTriggers.forEach(trigger =>
+          trigger.addEventListener('focus', handleFocus));
+  keyboardTriggers.forEach(trigger =>
+          trigger.addEventListener('blur', handleBlur));
+
 </script>
 
 </body>
