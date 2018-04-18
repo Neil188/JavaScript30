@@ -4,10 +4,16 @@ html {
   background-size: cover;
 }
 
+/* border box fix, popularised by Paul Irish */
 *, *:before, *:after {
   box-sizing: inherit;
 }
 
+/* 
+  set as flex container (display flex), 
+  centre along the main axis (horizontally) (justify-content center)
+  centre along the cross axis (vertically) (align-item center)
+ */
 body {
   min-height: 100vh;
   display: flex;
@@ -18,6 +24,15 @@ body {
   margin: 0;
 }
 
+/* 
+  Prevent user from selecting text when clicking and dragging (user-select none)
+  Don't wrap text onto multiple lines  (white-space nowrap)
+  Set cursor to pointer (cursor pointer)
+  Animate all changes to css properties over 0.2 seconds (transition all 0.2s)
+  Adjust the size to 98%  (transform scale(0.98))
+  Provide a hint to the browser that the transform property will change (will-change transform)
+  Add some perspective to give a 3d effect (note requires transform scaleX below)  (perspective 500px)
+ */
 .items {
   height:800px;
   padding: 100px;
@@ -37,6 +52,10 @@ body {
   perspective: 500px;
 }
 
+/* 
+  Change cursor to grabbing icon - note requires -webkit vendor prefix  (cursor grabbing)
+  Resize to 100%  (transform scale(1))
+ */
 .items.active {
   background: rgba(255,255,255,0.3);
   cursor: grabbing;
@@ -44,6 +63,10 @@ body {
   transform: scale(1);
 }
 
+/* 
+  align each item on the cross axis (vertically)  (align-items center)
+  centre along the main axis (horizontally) (justify-content center)
+*/
 .item {
   width:200px;
   height: calc(100% - 40px);
@@ -66,5 +89,8 @@ body {
 .item:nth-child(9n+8) { background: darkslateblue;}
 .item:nth-child(9n+9) { background: rebeccapurple;}
 
+/* 
+  Alternate rotating along x axis, this is used with perspective setting to give 3d effect
+*/
 .item:nth-child(even) { transform: scaleX(1.31) rotateY(40deg); }
 .item:nth-child(odd) { transform: scaleX(1.31) rotateY(-40deg); }
