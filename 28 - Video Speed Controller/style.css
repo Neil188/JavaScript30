@@ -25,6 +25,7 @@ video {
   border-radius:50px;
   box-shadow:0 0 1px 3px rgba(0,0,0,0.1);
   overflow: hidden;
+  --height: 16.3;
 }
 .speed-bar {
   width:100%;
@@ -35,5 +36,9 @@ video {
   justify-content: center;
   padding:2px;
   color:white;
-  height:16.3%;
+  height: calc(var(--height) * 1%);
+}
+
+.speed-bar:before{
+  content: attr(data-speed);
 }
