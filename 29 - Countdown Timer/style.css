@@ -1,8 +1,8 @@
 html {
   box-sizing: border-box;
   font-size: 10px;
-  background: #8E24AA;
-  background: linear-gradient(45deg,  #42a5f5 0%,#478ed1 50%,#0d47a1 100%);
+  background: #425e4f;
+  background: linear-gradient(45deg,  #a4eac5 0%,#425e4f 50%,#30443a 100%);
 }
 
 *, *:before, *:after {
@@ -21,6 +21,17 @@ body {
   margin: 0;
   color:white;
   text-shadow:4px 4px 0 rgba(0,0,0,0.05);
+ }
+
+.display__time-left--finished {
+    animation: pulse 1s ease-in;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2);
+        color: red; }
+  100% { transform: scale(1); }
 }
 
 .timer {
