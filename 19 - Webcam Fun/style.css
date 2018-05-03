@@ -85,3 +85,21 @@ html {
 .strip a:nth-child(5n+3) img { transform: rotate(8deg); }
 .strip a:nth-child(5n+4) img { transform: rotate(-11deg); }
 .strip a:nth-child(5n+5) img { transform: rotate(12deg); }
+
+a.home {
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid black;
+  display: inline-block;
+  font-family: arial, sans-serif;
+  font-size: 1rem;
+  left:0;
+  padding: 10px;
+  position: absolute;
+  text-align: center;
+  text-decoration: none;
+  top:0;
+  }
+
+a.home:hover {
+  background: rgba(66,94,79,0.9);
+}

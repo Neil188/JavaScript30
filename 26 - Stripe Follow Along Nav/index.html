@@ -5,6 +5,7 @@
   <title>Follow Along Nav</title>
 </head>
 <body>
+  <a class="home" href="../index.html">Home</a>
   <h2>Cool</h2>
   <nav class="top">
     <div class="dropdownBackground">
@@ -218,6 +219,24 @@
   .button[href*=twitter] { background: #019FE9; }
   .button[href*=facebook] { background: #3B5998; }
   .button[href*=courses] { background: #ffc600; }
+
+  a.home {
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid black;
+    display: inline-block;
+    font-family: arial, sans-serif;
+    font-size: 1rem;
+    left:0;
+    padding: 10px;
+    position: absolute;
+    text-align: center;
+    text-decoration: none;
+    top:0;
+  }
+
+  a.home:hover {
+    background: rgba(66,94,79,0.9);
+  }
 </style>
 
 <script>

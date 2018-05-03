@@ -5,6 +5,8 @@
   <title>Scoped CSS Variables and JS</title>
 </head>
 <body>
+  <a class="home" href="../index.html">Home</a>
+
   <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
 
   <div class="controls">
@@ -59,6 +61,25 @@
     input {
       width:100px;
     }
+
+    a.home {
+      background: rgba(255, 255, 255, 0.4);
+      border: 1px solid black;
+      display: inline-block;
+      font-family: arial, sans-serif;
+      font-size: 1rem;
+      left:0;
+      padding: 10px;
+      position: absolute;
+      text-align: center;
+      text-decoration: none;
+      top:0;
+    }
+
+    a.home:hover {
+      background: rgba(66,94,79,0.9);
+    }
+
   </style>
 
   <script>

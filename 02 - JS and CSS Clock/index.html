@@ -5,7 +5,7 @@
   <title>JS + CSS Clock</title>
 </head>
 <body>
-
+    <a class="home" href="../index.html">Home</a>
 
     <div class="clock">
       <div class="clock-face">
@@ -46,14 +46,14 @@
     .clock {
       width: 30rem;
       height: 30rem;
-      border:20px solid white;
+      border:20px solid #425e4f;;
       border-radius:50%;
       margin:50px auto;
       position: relative;
       padding:2rem;
       box-shadow:
         0 0 0 4px rgba(0,0,0,0.1),
-        inset 0 0 0 3px #EFEFEF,
+        inset 0 0 0 3px rgba(66,94,79,0.8),
         inset 0 0 10px black,
         0 0 10px rgba(0,0,0,0.2);
     }
@@ -95,6 +95,23 @@
     .hand.hour-hand {
       transform: rotate(calc(var(--rotate-hour)*1deg));
       transition: var(--transition-hour);
+    }
+
+    a.home {
+      background: #425e4f;
+      border: 1px solid black;
+      display: inline-block;
+      font-family: arial, sans-serif;
+      font-size: 2rem;
+      padding: 10px;
+      position: absolute;
+      text-align: center;
+      text-decoration: none;
+      top:0;
+    }
+
+    a.home:hover {
+      background: rgba(66,94,79,0.9);
     }
 
   </style>
