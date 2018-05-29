@@ -21,6 +21,10 @@ h1, h2 {
   margin-bottom: 0;
 }
 
+h1 {
+  transition: transform 1s;
+}
+
 h2 {
   font-size: 5rem;
 }
@@ -30,11 +34,19 @@ button {
   font-size: 2rem;
 }
 
+h1.end {
+  transform: scale(1.1);
+}
+
 .score {
   background:rgba(255,255,255,0.2);
   padding:0 3rem;
   line-height:1;
   border-radius:1rem;
+}
+
+.score.fail {
+  color: red;
 }
 
 .game {
@@ -103,4 +115,10 @@ a.home {
 
 a.home:hover {
   background: rgba(66,94,79,0.9);
+}
+
+@media screen and (min-width: 600px) {
+  body {
+    overflow-x: hidden;
+  }
 }

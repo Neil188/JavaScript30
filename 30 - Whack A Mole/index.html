@@ -52,6 +52,7 @@
   <script>
     const holes = document.querySelectorAll('.hole');
     const scoreBoard = document.querySelector('.score');
+    const title = document.querySelector('h1');
     const moles = document.querySelectorAll('.mole');
     const table = document.querySelector('.topscores');
     let lastHole;
@@ -124,13 +125,15 @@
 
     const endGame = () => {
       timeUp = true;
-      scoreBoard.classList.add('end');
+      title.classList.add('end');
       if (score > 0 &&
         (topScores.length < 10 || topScores[9].score < score)) {
         const name = prompt('New Top score!  Enter name:') || 'Anonymous'
         topScores = newTopScores(topScores, score, name);
         storeTopScores(topScores);
         refreshTopScores(topScores);
+      } else {
+        scoreBoard.classList.add('fail');
       }
     }
 
@@ -149,8 +152,14 @@
       e.target.parentElement.classList.remove('up');
     }
 
+    const removeEnd = () => {
+      title.classList.remove('end');
+      scoreBoard.classList.remove('fail');
+    }
+
     moles.forEach(mole =>
       mole.addEventListener('click', handleClick));
+    title.addEventListener('transitionend', removeEnd);
     topScores = getTopScores();
     refreshTopScores(topScores);
   </script>
