@@ -8,6 +8,7 @@ html {
 
 html {
   font-size: 10px;
+  font-family: 'Verdana';
   background:#425e4f;
 }
 
@@ -42,6 +43,7 @@ html {
   --greenscreenDisplay: none;
   --rgbsplitDisplay: none;
   --redeffectDisplay: none;
+  margin-left: 5rem;
 }
 
 .controls button {

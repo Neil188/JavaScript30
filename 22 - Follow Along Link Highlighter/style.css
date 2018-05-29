@@ -32,10 +32,10 @@ a {
 
 .highlight {
   transition: all 0.2s;
-  border-bottom:2px solid white;
+  border-bottom:2px solid rgba(66,94,79,0.9);
   position: absolute;
   top:0;
-  background:white;
+  background:rgba(66,94,79,0.6);
   left:0;
   z-index: -1;
   border-radius:20px;
