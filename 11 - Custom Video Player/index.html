@@ -2,31 +2,35 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>HTML Video Player</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML Video Player</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="scripts.js" async></script>
 </head>
 
 <body>
-  <a class="home" href="../index.html">Home</a>
+    <a class="home" href="../index.html">Home</a>
 
-  <div class="player">
-    <video class="player__video viewer" src="https://player.vimeo.com/external/194837908.sd.mp4?s=c350076905b78c67f74d7ee39fdb4fef01d12420&profile_id=164"></video>
+    <div class="player">
+        <video class="player__video viewer" src="https://player.vimeo.com/external/194837908.sd.mp4?s=c350076905b78c67f74d7ee39fdb4fef01d12420&profile_id=164"
+            poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217"></video>
+        </video>
 
-    <div class="player__controls">
-      <div class="progress">
-        <div class="progress__filled"></div>
-      </div>
-      <button class="player__button toggle" title="Toggle Play">►</button>
-      <input type="range" name="volume" class="player__slider" min="0" max="1" step="0.05" value="1" title="Volume Control">
-      <input type="range" name="playbackRate" class="player__slider" min="0.5" max="2" step="0.1" value="1" title="Playback rate">
-      <button data-skip="-10" class="player__button" title="Skip back 10 seconds">« 10s</button>
-      <button data-skip="25" class="player__button" title="Skip forward 25 seconds">25s »</button>
-      <button class="player__button fullscreen" title="Fullscreen">F</button>
+        <div class="player__controls">
+            <div class="progress">
+                <div class="progress__filled"></div>
+            </div>
+            <button class="player__button toggle" title="Toggle Play">►</button>
+            <input type="range" name="volume" class="player__slider" min="0" max="1" step="0.05" value="1" title="Volume Control">
+            <input type="range" name="playbackRate" class="player__slider" min="0.5" max="2" step="0.1" value="1" title="Playback rate">
+            <button data-skip="-10" class="player__button" title="Skip back 10 seconds">« 10s</button>
+            <button data-skip="25" class="player__button" title="Skip forward 25 seconds">25s »</button>
+            <button class="player__button fullscreen" title="Fullscreen">F</button>
+        </div>
     </div>
-  </div>
 
-  <script src="scripts.js"></script>
 </body>
 
 </html>

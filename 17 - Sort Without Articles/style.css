@@ -1,0 +1,69 @@
+body {
+    margin: 0;
+    font-family: arial, sans-serif;
+    background: url("https://source.unsplash.com/nDqA4d5NL0k/2000x2000");
+    background-size: cover;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#bands {
+    list-style: inside disc;
+    font-size: 20px;
+    background: white;
+    width: 500px;
+    padding: 0;
+    box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05);
+}
+
+#bands li {
+    border-bottom: 1px solid #efefef;
+    padding: 20px;
+}
+
+#bands li:last-child {
+    border-bottom: 0;
+}
+
+.instructions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255,255,255,0.6);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.instructions button {
+    border-radius: 5px;
+    font-size: 15px;
+    width: 100px;
+}
+
+a {
+    color: #ffc600;
+    text-decoration: none;
+}
+
+a.home {
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid black;
+    display: inline-block;
+    font-family: arial, sans-serif;
+    font-size: 1rem;
+    left:0;
+    padding: 10px;
+    position: absolute;
+    text-align: center;
+    text-decoration: none;
+    top:0;
+}
+  
+a.home:hover {
+    background: rgba(66,94,79,0.9);
+}

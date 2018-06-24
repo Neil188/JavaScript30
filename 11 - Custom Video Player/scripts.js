@@ -12,13 +12,13 @@ const fullScreen = player.querySelector('.fullscreen');
 const togglePlay = () =>
     (video.paused) ? video.play() : video.pause();
 
-const upDateButton = () => 
+const upDateButton = () =>
     toggle.textContent = (video.paused) ? '►' : '❚ ❚';
 
-const skip = ({target}) =>
+const skip = ({ target }) =>
     video.currentTime += parseFloat(target.dataset.skip);
 
-const handleRangeUpdate = ({target}) =>
+const handleRangeUpdate = ({ target }) =>
     video[target.name] = target.value;
 
 const handleProgress = () => {
@@ -26,7 +26,7 @@ const handleProgress = () => {
     progressBar.style.flexBasis = `${percent}%`;
 }
 
-const scrub = ({offsetX}) =>
+const scrub = ({ offsetX }) =>
     video.currentTime = (offsetX / progress.offsetWidth) * video.duration;
 
 const goFullScreen = () =>

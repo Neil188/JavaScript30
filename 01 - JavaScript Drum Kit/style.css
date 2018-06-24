@@ -1,65 +1,68 @@
 html {
-  font-size: 10px;
-  background:  #252525 url(http://i.imgur.com/b9r5sEL.jpg) bottom center;
-  background-size: cover;
+    background: #252525 url(http://i.imgur.com/b9r5sEL.jpg) bottom center;
+    background-size: cover;
+    font-size: 10px;
 }
+
 body,html {
-  margin: 0;
-  padding: 0;
-  font-family: arial, sans-serif;
+    font-family: arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 a.home {
-  background: #425e4f;
-  border: 1px solid black;
-  display: inline-block;
-  font-size: 2rem;
-  padding: 10px;
-  position: absolute;
-  text-align: center;
-  text-decoration: none;
+    background: #425e4f;
+    border: 1px solid black;
+    display: inline-block;
+    font-size: 2rem;
+    padding: 10px;
+    position: absolute;
+    text-align: center;
+    text-decoration: none;
 }
 
 a.home:hover {
-  background: rgba(66,94,79,0.9);
+    background: rgba(66,94,79,0.9);
 }
 
 .keys {
-  display: flex;
-  flex: 1;
-  min-height: 100vh;
-  align-items: center;
-  justify-content: center;
+    align-items: center;
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-height: 100vh;
 }
 
 .key {
-  border: .4rem solid black;
-  border-radius: .5rem;
-  margin: 1rem;
-  font-size: 1.5rem;
-  padding: 1rem .5rem;
-  transition: all .07s ease;
-  width: 10rem;
-  text-align: center;
-  color: white;
-  background: rgba(66,94,79,0.4);
-  text-shadow: 0 0 .5rem black;
+    background: rgba(66,94,79,0.4);
+    border: .4rem solid black;
+    border-radius: .5rem;
+    color: white;
+    font-size: 1.5rem;
+    margin: 1rem;
+    padding: 1rem .5rem;
+    transition: all .07s ease;
+    text-align: center;
+    text-shadow: 0 0 .5rem black;
+    user-select: none;
+    width: 10rem;
 }
 
 .playing {
-  transform: scale(1.1);
-  border-color: #ffc600;
-  box-shadow: 0 0 1rem #ffc600;
+    border-color: #ffc600;
+    box-shadow: 0 0 1rem #ffc600;
+    transform: scale(1.1);
 }
 
 kbd {
-  display: block;
-  font-size: 4rem;
+    display: block;
+    font-size: 4rem;
 }
 
 .sound {
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  letter-spacing: .1rem;
-  color: #ffc600;
+    color: #ffc600;
+    font-size: 1.2rem;
+    letter-spacing: .1rem;
+    text-transform: uppercase;
 }

@@ -1,86 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Sort Without Articles</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sort Without Articles</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" async></script>
 </head>
+
 <body>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: sans-serif;
-      background: url("https://source.unsplash.com/nDqA4d5NL0k/2000x2000");
-      background-size: cover;
-      display: flex;
-      align-items: center;
-      min-height: 100vh;
-    }
+    <div class="container">
+        <div class="instructions">
+            <p>Make changes to the list then click the button below to re-sort</p>
+            <button id="sort">Sort List</button>
+        </div>
 
-    #bands {
-      list-style: inside square;
-      font-size: 20px;
-      background: white;
-      width: 500px;
-      margin: auto;
-      padding: 0;
-      box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05);
-    }
-    #bands li {
-      border-bottom: 1px solid #efefef;
-      padding: 20px;
-    }
-    #bands li:last-child {
-      border-bottom: 0;
-    }
+        <a class="home" href="../index.html">Home</a>
 
-    a {
-      color: #ffc600;
-      text-decoration: none;
-    }
-
-    a.home {
-      background: rgba(255, 255, 255, 0.4);
-      border: 1px solid black;
-      display: inline-block;
-      font-family: arial, sans-serif;
-      font-size: 1rem;
-      left:0;
-      padding: 10px;
-      position: absolute;
-      text-align: center;
-      text-decoration: none;
-      top:0;
-    }
-    
-    a.home:hover {
-      background: rgba(66,94,79,0.9);
-    }
-
-  </style>
-
-  <a class="home" href="../index.html">Home</a>
-  
-  <ul id="bands"></ul>
-
-<script>
-const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
-
-const bandList = document.querySelector('#bands');
-
-const withoutArticle = sentence =>
-  sentence.replace( /^(a|an|the)\b/i,'').trim();
-
-const sortedBands = bands.sort( (a,b) =>
-  withoutArticle(a) < withoutArticle(b) ? -1 : 1 );
-
-sortedBands.forEach( band => { 
-  const listEntry = document.createElement('li');
-  listEntry.textContent = band;
-  bandList.appendChild(listEntry);
-})
-
-</script>
+        <ul id="bands" contenteditable="true"></ul>
+    </div>
 
 </body>
+
 </html>

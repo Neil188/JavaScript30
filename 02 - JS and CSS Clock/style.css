@@ -1,0 +1,97 @@
+.clock {
+    --rotate-second: 90;
+    --rotate-min: 90;
+    --rotate-hour: 90;
+    --transition-second: '';
+    --transition-min: '';
+    --transition-hour: '';
+}
+
+html {
+    background: url(http://unsplash.it/1500/1000?image=881&blur=50), linear-gradient(#018DED, #001350);
+    background-size: cover;
+    font-family: 'helvetica neue';
+    text-align: center;
+    font-size: 10px;
+}
+
+body {
+    margin: 0;
+    font-size: 2rem;
+    display: flex;
+    flex: 1;
+    min-height: 100vh;
+    align-items: center;
+}
+
+.clock {
+    width: 30rem;
+    height: 30rem;
+    border: 20px solid #425e4f;
+    ;
+    border-radius: 50%;
+    margin: 50px auto;
+    position: relative;
+    padding: 2rem;
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 3px rgba(66, 94, 79, 0.8),
+    inset 0 0 10px black,
+    0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.clock-face {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform: translateY(-3px);
+    /* account for the height of the clock hands */
+}
+
+.hand {
+    width: 50%;
+    height: 6px;
+    background: black;
+    position: absolute;
+    top: 50%;
+    /* Set rotation base to 100% - end of line, instead of middle */
+    transform-origin: 100%;
+    /* By default rotate by 90 deg, so clock starts at 12:00 */
+    transform: rotate(90deg);
+    /* add transition time so hands flow to next point */
+    transition: all 0.05s;
+    /* cubic bezier gives an authentic looking tick, where
+    the hand goes slightly past then bounces back */
+    transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+}
+
+.hand.second-hand {
+    transform: rotate(calc(var(--rotate-second)*1deg));
+    transition: var(--transition-second);
+}
+
+.hand.min-hand {
+    transform: rotate(calc(var(--rotate-min)*1deg));
+    transition: var(--transition-min);
+}
+
+.hand.hour-hand {
+    transform: rotate(calc(var(--rotate-hour)*1deg));
+    transition: var(--transition-hour);
+}
+
+a.home {
+    background: #425e4f;
+    border: 1px solid black;
+    display: inline-block;
+    font-family: arial, sans-serif;
+    font-size: 2rem;
+    padding: 10px;
+    position: absolute;
+    text-align: center;
+    text-decoration: none;
+    top: 0;
+}
+
+a.home:hover {
+    background: rgba(66, 94, 79, 0.9);
+}

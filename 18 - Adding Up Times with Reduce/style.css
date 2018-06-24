@@ -1,0 +1,60 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.videos {
+    list-style: inside square;
+    font-size: 20px;
+    background: white;
+    width: 500px;
+    margin: auto;
+    padding: 0;
+    box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05);
+}
+
+.videos li {
+    border-bottom: 1px solid #efefef;
+    padding: 20px;
+  }
+
+.videos li:last-child {
+    border-bottom: 0;
+}
+
+[data-time]::after {
+    color: #425e4f;
+    content: attr(data-time);
+    font-size: 0.8em;
+    padding-left: 20px;
+}
+
+.total {
+    color: #425e4f;
+    margin: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.total p {
+    text-align: right;
+    width: 500px;
+}
+
+a.home {
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid black;
+    display: inline-block;
+    font-family: arial, sans-serif;
+    font-size: 1rem;
+    left:0;
+    padding: 10px;
+    position: absolute;
+    text-align: center;
+    text-decoration: none;
+    top:0;
+}
+  
+a.home:hover {
+    background: rgba(66,94,79,0.9);
+}

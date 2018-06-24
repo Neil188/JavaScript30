@@ -1,194 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Flex Panels 💪</title>
-  <link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Flex Panels 💪</title>
+    <link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" async></script>
 </head>
+
 <body>
-  <style>
-    html {
-      box-sizing: border-box;
-      background:#ffc600;
-      font-family:'helvetica neue';
-      font-size: 20px;
-      font-weight: 200;
-    }
-    body {
-      margin: 0;
-    }
-    *, *:before, *:after {
-      box-sizing: inherit;
-    }
 
-    /* set .panels to use flexbox */ 
-    .panels {
-      min-height:100vh;
-      overflow: hidden;
-      display: flex;
-    }
+    <a class="home" href="../index.html">Home</a>
 
-    .panel {
-      background:#6B0F9C;
-      box-shadow:inset 0 0 0 5px rgba(255,255,255,0.1);
-      color:white;
-      text-align: center;
-      align-items:center;
-      /* Safari transitionend event.propertyName === flex */
-      /* Chrome + FF transitionend event.propertyName === flex-grow */
-      transition:
-        font-size 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
-        flex 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
-        background 0.2s;
-      font-size: 20px;
-      background-size:cover;
-      background-position:center;
-      /* Set each flex panel to evenly distribute across the containing flex element */
-      flex: 1;
-      /* Centre content along main axis (horizontally) */
-      justify-content: center;
-      align-items: center;
-      /* Set panel as a flex container (so it is a flex child and a flex container */
-      display: flex;
-      /* Set the flex main axis to column (vertical) 
-        The panels contents will then be vetically arranged.
-      */
-      flex-direction: column;
-    }
-
-
-    .panel1 { background-image:url(https://source.unsplash.com/gYl-UtwNg_I/1500x1500); }
-    .panel2 { background-image:url(https://source.unsplash.com/rFKUFzjPYiQ/1500x1500); }
-    .panel3 { background-image:url(https://images.unsplash.com/photo-1465188162913-8fb5709d6d57?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&w=1500&h=1500&fit=crop&s=967e8a713a4e395260793fc8c802901d); }
-    .panel4 { background-image:url(https://source.unsplash.com/ITjiVXcwVng/1500x1500); }
-    .panel5 { background-image:url(https://source.unsplash.com/3MNzGlQM7qs/1500x1500); }
-
-    /* Flex items */
-    .panel > * {
-      margin:0;
-      width: 100%;
-      transition:transform 0.5s;
-      flex: 1 0 auto;
-      /* Another nested flexbox */
-      display: flex;
-      /* Make sure contents are centred within the panel */
-      justify-content: center;
-      align-items: center;
-    }
-
-    /* Within each panel, hide the first and last child by translating them off screen
-      then when the open-active panel is added move first/last child back on screen
-      transition transform property above will result in the text sliding into position
-    */
-    .panel > *:first-child {
-      transform: translateY(-100%);
-    }
-    .panel.open-active > *:first-child {
-      transform: translateY(0);
-    }
-    .panel > *:last-child {
-      transform: translateY(100%);
-    }
-    .panel.open-active > *:last-child {
-      transform: translateY(0);
-    }
-
-    .panel p {
-      text-transform: uppercase;
-      font-family: 'Amatic SC', cursive;
-      text-shadow:0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
-      font-size: 2em;
-    }
-    .panel p:nth-child(2) {
-      font-size: 4em;
-    }
-
-    .panel.open {
-      font-size:40px;
-      /* When the open class is added, grow the panel by giving it 
-      5x the amount of allocated space 
-      */
-      flex: 5;
-    }
-
-    a.home {
-      background: rgba(255, 255, 255, 0.4);
-      border: 1px solid black;
-      display: inline-block;
-      font-family: arial, sans-serif;
-      font-size: 1rem;
-      left:0;
-      padding: 10px;
-      position: absolute;
-      text-align: center;
-      text-decoration: none;
-      top:0;
-    }
-
-    a.home:hover {
-      background: rgba(66,94,79,0.9);
-    }
-
-  </style>
-
-  <a class="home" href="../index.html">Home</a>
-
-  <div class="panels">
-    <div class="panel panel1">
-      <p>Hey</p>
-      <p>Let's</p>
-      <p>Dance</p>
+    <div class="panels">
+        <div class="panel panel1">
+            <p>Hey</p>
+            <p>Let's</p>
+            <p>Dance</p>
+        </div>
+        <div class="panel panel2">
+            <p>Give</p>
+            <p>Take</p>
+            <p>Receive</p>
+        </div>
+        <div class="panel panel3">
+            <p>Experience</p>
+            <p>It</p>
+            <p>Today</p>
+        </div>
+        <div class="panel panel4">
+            <p>Give</p>
+            <p>All</p>
+            <p>You can</p>
+        </div>
+        <div class="panel panel5">
+            <p>Life</p>
+            <p>In</p>
+            <p>Motion</p>
+        </div>
     </div>
-    <div class="panel panel2">
-      <p>Give</p>
-      <p>Take</p>
-      <p>Receive</p>
-    </div>
-    <div class="panel panel3">
-      <p>Experience</p>
-      <p>It</p>
-      <p>Today</p>
-    </div>
-    <div class="panel panel4">
-      <p>Give</p>
-      <p>All</p>
-      <p>You can</p>
-    </div>
-    <div class="panel panel5">
-      <p>Life</p>
-      <p>In</p>
-      <p>Motion</p>
-    </div>
-  </div>
-
-  <script>
-    const panels = document.querySelectorAll(".panel");
-    
-    function toggleOpen() {
-      this.classList.toggle('open');
-    }
-
-    // the transitionend event will trigger for every transition
-    // so we need to check which transition has ended
-    // the event properyName holds the name of the transition
-    // note not all browsers report this as 'flex-grow', Safari returns 'flex'
-    // so check to see if property name includes flex, instead of equals 'flex-grow'
-    function toggleActive(e) {
-      e.propertyName.includes('flex') && 
-        this.classList.toggle('open-active');
-    }
-
-    // on click toggle the open class, which grows the flex panel
-    panels.forEach( panel =>
-          panel.addEventListener('click', toggleOpen));
-    // Once the grow transition finishes toggle the open-active class
-    // twhich causes the top and bottom text to transition in
-    panels.forEach( panel =>
-          panel.addEventListener('transitionend', toggleActive));
-
-  </script>
-
-
 
 </body>
+
 </html>
