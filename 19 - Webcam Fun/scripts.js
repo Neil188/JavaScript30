@@ -4,13 +4,14 @@ const ctx = canvas.getContext('2d');
 const strip = document.querySelector('.strip');
 const snap = document.querySelector('.snap');
 const options = document.querySelector('.options');
+const photo = document.querySelector('#photo');
 
 let opts = {
     face: false,
 }
 
-getVideo = () => {
-    navigator.mediaDevices.getUserMedia( {video: true, audio:false})
+const getVideo = () => {
+    navigator.mediaDevices.getUserMedia( { video: true, audio:false })
         .then( localMediaStream => {
             // set source to media stream
             video.srcObject = localMediaStream;
@@ -23,34 +24,10 @@ getVideo = () => {
 };
 
 
-paintToCanvas = () => {
-    const {videoWidth : width, videoHeight : height} = video;
-    // reset canvas size to match video
-    [canvas.width, canvas.height] = [width, height];
-    const paint = () => {
-        ctx.drawImage(video, 0, 0, width, height);
-        // get the pixels from the image
-        let pixels = ctx.getImageData(0, 0, width, height);
-        // update pixels
-        pixels.data = opts.redeffect ? redEffect(pixels)
-                : opts.rgbsplit ? rgbSplit(pixels)
-                : opts.greenscreen ? greenScreen(pixels)
-                : pixels;
-        // update canvas using new pixels
-        ctx.putImageData(pixels, 0, 0);
+const redEffect = ( { data } ) => {
 
-        // now look for faces
-        opts.face && detectFaces();
-
-        requestAnimationFrame(paint);
-    };
-
-    requestAnimationFrame(paint);
-};
-
-redEffect = ( {data} ) => {
     const levels = {};
-    
+
     document.querySelectorAll('.redeffect input').forEach((input) => {
         levels[input.name] = Number(input.value);
     });
@@ -67,10 +44,10 @@ redEffect = ( {data} ) => {
     return data;
 };
 
-rgbSplit = ( {data} ) => {
+const rgbSplit = ( { data } ) => {
     const levels = {};
     const original = [...data];
-    
+
     document.querySelectorAll('.rgbsplit input').forEach((input) => {
         levels[input.name] = Number(input.value);
     });
@@ -86,34 +63,84 @@ rgbSplit = ( {data} ) => {
     return data;
 };
 
-greenScreen = ( {data} ) => {
+const greenScreen = ( { data } ) => {
     const levels = {};
 
     document.querySelectorAll('.greenscreen input').forEach((input) => {
-      levels[input.name] = input.value;
+        levels[input.name] = input.value;
     });
 
-    for (i = 0; i < data.length; i = i + 4) {
-      red = data[i + 0];
-      green = data[i + 1];
-      blue = data[i + 2];
-      alpha = data[i + 3];
+    for (let i = 0; i < data.length; i += 4) {
+        const red = data[i + 0];
+        const green = data[i + 1];
+        const blue = data[i + 2];
+        // const alpha = data[i + 3];
 
-      if (red >= levels.rmin
+        if (red >= levels.rmin
         && green >= levels.gmin
         && blue >= levels.bmin
         && red <= levels.rmax
         && green <= levels.gmax
         && blue <= levels.bmax) {
         // take it out by setting transparency to 0
-        data[i + 3] = 0;
-      }
+            data[i + 3] = 0;
+        }
     }
 
     return data;
+};
+
+const detectFaces = (source) => {
+    // detect all faces on canvas using ccv
+    const faces = [...ccv.detectObjects(
+        {   "canvas" : (ccv.pre(source)),
+            "cascade" : cascade,
+            "interval" : 5,
+            "minNeighbors": 1,
+        }
+
+    )];
+
+    // draw rectangle around each detected face
+    faces.forEach( face => {
+        ctx.beginPath();
+        ctx.strokeRect(face.x, face.y, face.width, face.height);
+        ctx.closePath();
+    });
+
 }
 
-takePhoto = () => {
+const paintToCanvas = () => {
+    const { videoWidth : width, videoHeight : height } = video;
+    // reset canvas size to match video
+    [canvas.width, canvas.height] = [width, height];
+    const paint = () => {
+        ctx.drawImage(video, 0, 0, width, height);
+        if ( opts.redeffect || opts.rgbsplit || opts.greenscreen ) {
+            // get the pixels from the image
+            const pixels = ctx.getImageData(0, 0, width, height);
+            // update pixels
+            const data = opts.redeffect ? redEffect(pixels)
+                : opts.rgbsplit ? rgbSplit(pixels)
+                    : opts.greenscreen ? greenScreen(pixels)
+                        : pixels.data;
+
+            // create ImageData object
+            const imageData = new ImageData( data, width, height );
+            // update canvas using new pixels
+            ctx.putImageData(imageData, 0, 0);
+        }
+
+        // now look for faces
+        opts.face && detectFaces(ctx.canvas);
+
+        requestAnimationFrame(paint);
+    };
+
+    requestAnimationFrame(paint);
+};
+
+const takePhoto = () => {
     // Play sound
     snap.currentTime = 0;
     snap.play();
@@ -129,36 +156,16 @@ takePhoto = () => {
     strip.insertBefore(link, strip.firstChild);
 }
 
-
-detectFaces = () => {
-    // detect all faces on canvas using ccv
-    const faces = [...ccv.detect_objects(
-        {   "canvas" : (ccv.pre(canvas)), 
-            "cascade" : cascade,
-            "interval" : 5,
-            "min_neighbors": 1
-        }
-        
-    )];
-
-    // draw rectangle around each detected face
-    faces.forEach( face => {
-        ctx.beginPath();
-        ctx.strokeRect(face.x, face.y, face.width, face.height);
-        ctx.closePath();
-    });
-}
-
 const handleOptionsChange = () => {
     const controls = document.querySelector('.controls');
     opts = { face: options.face.checked };
     const currentEffect = options.effect.value;
     controls.style.setProperty('--greenscreenDisplay',
-        currentEffect === 'greenscreen' ? 'block' : 'none');
+        currentEffect === 'greenscreen' ? 'flex' : 'none');
     controls.style.setProperty('--rgbsplitDisplay',
-        currentEffect === 'rgbsplit' ? 'block' : 'none');
+        currentEffect === 'rgbsplit' ? 'flex' : 'none');
     controls.style.setProperty('--redeffectDisplay',
-        currentEffect === 'redeffect' ? 'block' : 'none');
+        currentEffect === 'redeffect' ? 'flex' : 'none');
     opts[currentEffect] = true;
 }
 
@@ -166,4 +173,7 @@ getVideo();
 // once video.play is called, and the video is ready the canplay event fires
 video.addEventListener('canplay', paintToCanvas);
 
-options.addEventListener('change', handleOptionsChange)
+options.addEventListener('change', handleOptionsChange);
+photo.addEventListener('click', takePhoto);
+
+

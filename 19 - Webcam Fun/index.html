@@ -1,86 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Get User Media Code Along!</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Get User Media Code Along!</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="scripts.js" type="module" async></script>
 </head>
+
 <body>
-  <a class="home" href="../index.html">Home</a>
+    <a class="home" href="../index.html">Home</a>
 
-  <div class="photobooth">
-    <div class="controls">
-      <button onClick="takePhoto()">Take Photo</button>
-      <form class="options">
-        <label for="face">Face detection</label>
-        <input type="checkbox" name="face" id="face">
-        <div>
-          <label for="noeffect">No effects:</label>
-          <input type="radio" name="effect" value="noeffect" id="noeffect" checked>
-          <label for="redeffect">Red Effect:</label>
-          <input type="radio" name="effect" value="redeffect" id="redeffect">
-          <label for="rgbsplit">RGB Split:</label>
-          <input type="radio" name="effect" value="rgbsplit" id="rgbsplit">
-          <label for="greenscreen">GreenScreen:</label>
-          <input type="radio" name="effect" value="greenscreen" id="greenscreen">
-        </div>
-      </form>
-      <div class="greenscreen">
-        <label for="rmin">Red Min:</label>
-        <input type="range" min=0 max=255 name="rmin">
-        <label for="rmax">Red Max:</label>
-        <input type="range" min=0 max=255 name="rmax">
+    <div class="photobooth">
+        <section>
+            <div class="controls">
+                <button id="photo">Take Photo</button>
+                <form class="options">
+                    <label for="face">Face detection
+                        <input type="checkbox" name="face" id="face">
+                    </label>
+                    <div>
+                        <label for="noeffect">No effects:
+                            <input type="radio" name="effect" value="noeffect" id="noeffect" checked>
+                        </label>
+                        <label for="redeffect">Red Effect:
+                            <input type="radio" name="effect" value="redeffect" id="redeffect">
+                        </label>
+                        <label for="rgbsplit">RGB Split:
+                            <input type="radio" name="effect" value="rgbsplit" id="rgbsplit">
+                        </label>
+                        <label for="greenscreen">GreenScreen:
+                            <input type="radio" name="effect" value="greenscreen" id="greenscreen">
+                        </label>
+                    </div>
+                </form>
+                <div class="greenscreen">
+                    <div class="colours">
+                        <label for="rmin">Red Min:
+                            <input type="range" min=0 max=255 name="rmin">
+                        </label>
+                        <label for="rmax">Red Max:
+                            <input type="range" min=0 max=255 name="rmax">
+                        </label>
+                    </div>
 
-        <br>
+                    <div class="colours">
+                        <label for="gmin">Green Min:
+                            <input type="range" min=0 max=255 name="gmin">
+                        </label>
+                        <label for="gmax">Green Max:
+                            <input type="range" min=0 max=255 name="gmax">
+                        </label>
+                    </div>
 
-        <label for="gmin">Green Min:</label>
-        <input type="range" min=0 max=255 name="gmin">
-        <label for="gmax">Green Max:</label>
-        <input type="range" min=0 max=255 name="gmax">
+                    <div class="colours">
+                        <label for="bmin">Blue Min:
+                            <input type="range" min=0 max=255 name="bmin">
+                        </label>
+                        <label for="bmax">Blue Max:
+                            <input type="range" min=0 max=255 name="bmax">
+                        </label>
+                    </div>
+                </div>
 
-        <br>
+                <div class="rgbsplit">
+                    <label for="red">Red :
+                        <input type="range" min=-600 max=600 value=-80 step=4 name="red">
+                    </label>
 
-        <label for="bmin">Blue Min:</label>
-        <input type="range" min=0 max=255 name="bmin">
-        <label for="bmax">Blue Max:</label>
-        <input type="range" min=0 max=255 name="bmax">
-      </div>
-      <div class="rgbsplit">
-        <label for="red">Red :</label>
-        <input type="range" min=-600 max=600 value=-80 step=4 name="red">
-        <br>
+                    <label for="green">Green :
+                        <input type="range" min=-600 max=600 value=120 step=4 name="green">
+                    </label>
 
-        <label for="green">Green :</label>
-        <input type="range" min=-600 max=600 value=120 step=4 name="green">
-        <br>
+                    <label for="blue">Blue :
+                        <input type="range" min=-600 max=600 value=400 step=4 name="blue">
+                    </label>
+                </div>
+                <div class="redeffect">
 
-        <label for="blue">Blue :</label>
-        <input type="range" min=-600 max=600 value=400 step=4 name="blue">
-      </div>
-      <div class="redeffect">
-        <label for="red">Red :</label>
-        <input type="range" min=-100 max=100 value=-50 name="red">
-        <br>
+                    <label for="red">Red :
+                        <input type="range" min=-100 max=100 value=-50 name="red">
+                    </label>
 
-        <label for="green">Green :</label>
-        <input type="range" min=-100 max=100 value=10 name="green">
-        <br>
+                    <label for="green">Green :
+                        <input type="range" min=-100 max=100 value=10 name="green">
+                    </label>
 
-        <label for="blue">Blue :</label>
-        <input type="range" min=-100 max=100 value=20 name="blue">
-      </div>
+                    <label for="blue">Blue :
+                        <input type="range" min=-100 max=100 value=20 name="blue">
+                    </label>
+
+                </div>
+            </div>
+            <video class="player"></video>
+        </section>
+        <canvas class="photo"></canvas>
+        <div class="strip"></div>
     </div>
 
-    <canvas class="photo"></canvas>
-    <video class="player"></video>
-    <div class="strip"></div>
-  </div>
+    <audio class="snap" src="https://wesbos.com/demos/photobooth/snap.mp3" hidden></audio>
 
-  <audio class="snap" src="http://wesbos.com/demos/photobooth/snap.mp3" hidden></audio>
-
-  <script src="ccv.js"></script>
-  <script src="face.js"></script>
-  <script src="scripts.js"></script>
+    <script src="ccv.js"></script>
+    <script src="face.js"></script>
 
 </body>
+
 </html>

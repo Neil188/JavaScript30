@@ -13,6 +13,8 @@ html {
 }
 
 .photobooth {
+  display: flex;
+  flex-flow: column wrap;
   font-size: 1.6rem;
   max-width:150rem;
   margin: 2rem auto;
@@ -26,6 +28,14 @@ html {
   clear: both;
 }
 
+.photobooth section {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: 0 4rem;
+  align-content: flex-start;
+}
+
 .photo {
   background:white;
   width:100%;
@@ -33,38 +43,68 @@ html {
 }
 
 .player {
-  position: absolute;
   top:20px;
   right: 20px;
-  width:200px;
+  width: 200px;
+  height: 200px;
+}
+
+@media screen and (max-width: 800px) {
+  .player {
+    display: none;
+  }
 }
 
 .controls {
   --greenscreenDisplay: none;
   --rgbsplitDisplay: none;
   --redeffectDisplay: none;
-  margin-left: 5rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .controls button {
   margin-bottom: 1.5rem;
   font-size: 2rem;
+  width: 15rem;
 }
 
-.controls input {
-  margin: 0 1rem 1.5rem 0;
+.controls label {
+  margin: 0.5rem 1rem 0.5rem 0;
+  display: flex;
+  align-items: center;
 }
 
-.greenscreen {
+.options > div > label {
+  display: inline-block;
+}
+
+.greenscreen, .rgbsplit, .redeffect {
   display: var(--greenscreenDisplay);
+  flex-direction: column;
 }
 
 .rgbsplit {
   display: var(--rgbsplitDisplay);
+  flex-direction: column;
 }
 
 .redeffect {
   display: var(--redeffectDisplay);
+  flex-direction: column;
+}
+
+.colours {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.colours > div {
+  display: inline-block;
+}
+
+input[type="range"] {
+  margin-left: 1rem;
 }
 
 /*
@@ -72,7 +112,11 @@ html {
 */
 
 .strip {
-  padding:2rem;
+  margin-top: -3.5rem;
+  padding: 0 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 .strip img {
   width:100px;
