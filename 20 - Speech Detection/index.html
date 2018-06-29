@@ -1,112 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Speech Detection</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Speech Detection</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="scripts.js" async></script>
 </head>
+
 <body>
-  <a class="home" href="../index.html">Home</a>
-  <div class="words" contenteditable>
-  </div>
+    <a class="home" href="../index.html">Home</a>
 
-<script>
-  // currently speech recognition only available in Firefox, chrome has webkitSpeechRecognition
-  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-  const recognition = new SpeechRecognition();
-  //set recognition to pick up words when spoken instead of waiting for a break
-  recognition.interimResults = true;
-  recognition.lang = 'en-GB';
-
-  // create new paragraph to put text into
-  let p = document.createElement('p');
-  const words = document.querySelector('.words');
-  words.appendChild(p);
-
-  // listen for 'result' event, triggered by speech recognition
-  recognition.addEventListener('result', ({ results }) => {
-      const transcript = Array.from(results)
-        .map(result => result[0])
-        .map(result => result.transcript)
-        .join('');
-
-      // add current text to page
-      p.textContent = transcript;
-      // if recognition detects an end (isFinal flag set), then
-      // create a new element for the next sentence
-      if (results[0].isFinal) {
-          p = document.createElement('p');
-          words.appendChild(p);
-      }
-  });
-  
-  // when recognition recognises an end to the current sentence
-  // it will stop running, so we need to restart it for each 'end' event
-  recognition.addEventListener('end', recognition.start);
-
-  // now start listening
-  recognition.start();
-
-</script>
-
-
-  <style>
-    html {
-      font-size: 10px;
-    }
-
-    body {
-      background: #425e4f;
-      font-family: 'helvetica neue';
-      font-weight: 200;
-      font-size: 20px;
-    }
-
-    .words {
-      max-width:500px;
-      margin:50px auto;
-      background:white;
-      border-radius:5px;
-      box-shadow:10px 10px 0 rgba(0,0,0,0.1);
-      padding:1rem 2rem 1rem 5rem;
-      background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;
-      background-size: 100% 3rem;
-      position: relative;
-      line-height:3rem;
-    }
-    p {
-      margin: 0 0 3rem;
-    }
-
-    .words:before {
-      content: '';
-      position: absolute;
-      width: 4px;
-      top: 0;
-      left: 30px;
-      bottom: 0;
-      border: 1px solid;
-      border-color: transparent #efe4e4;
-    }
-
-    a.home {
-      background: rgba(255, 255, 255, 0.4);
-      border: 1px solid black;
-      display: inline-block;
-      font-family: arial, sans-serif;
-      font-size: 1rem;
-      left:0;
-      padding: 10px;
-      position: absolute;
-      text-align: center;
-      text-decoration: none;
-      top:0;
-      }
-
-    a.home:hover {
-      background: rgba(66,94,79,0.9);
-    }
-  </style>
+    <div class="words" contenteditable>
+    </div>
 
 </body>
+
 </html>

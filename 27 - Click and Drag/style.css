@@ -107,6 +107,7 @@ a.home {
   text-align: center;
   text-decoration: none;
   top:0;
+  z-index: 2;
 }
 
 a.home:hover {

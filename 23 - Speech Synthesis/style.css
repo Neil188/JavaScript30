@@ -1,6 +1,6 @@
 html {
-  font-size: 10px;
   box-sizing: border-box;
+  font-size: 10px;
 }
 
 *, *:before, *:after {
@@ -8,14 +8,8 @@ html {
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  background-color:#3BC1AC;
-  display:flex;
-  min-height: 100vh;
   align-items: center;
-
+  background-color:#3BC1AC;
   background-image:
   radial-gradient(circle at 100% 150%, #3BC1AC 24%, #42D2BB 25%, #42D2BB 28%, #3BC1AC 29%, #3BC1AC 36%, #42D2BB 36%, #42D2BB 40%, transparent 40%, transparent),
   radial-gradient(circle at 0    150%, #3BC1AC 24%, #42D2BB 25%, #42D2BB 28%, #3BC1AC 29%, #3BC1AC 36%, #42D2BB 36%, #42D2BB 40%, transparent 40%, transparent),
@@ -23,47 +17,52 @@ body {
   radial-gradient(circle at 100% 50%, #42D2BB 5%, #3BC1AC 6%, #3BC1AC 15%, #42D2BB 16%, #42D2BB 20%, #3BC1AC 21%, #3BC1AC 30%, #42D2BB 31%, #42D2BB 35%, #3BC1AC 36%, #3BC1AC 45%, #42D2BB 46%, #42D2BB 49%, transparent 50%, transparent),
   radial-gradient(circle at 0    50%, #42D2BB 5%, #3BC1AC 6%, #3BC1AC 15%, #42D2BB 16%, #42D2BB 20%, #3BC1AC 21%, #3BC1AC 30%, #42D2BB 31%, #42D2BB 35%, #3BC1AC 36%, #3BC1AC 45%, #42D2BB 46%, #42D2BB 49%, transparent 50%, transparent);
   background-size:100px 50px;
+  display:flex;
+  font-family: sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  padding: 0;
+
 }
 
 
 .voiceinator {
-  padding:2rem;
-  width:50rem;
-  margin:0 auto;
-  border-radius:1rem;
-  position: relative;
   background:white;
-  overflow: hidden;
-  z-index: 1;
+  border-radius:1rem;
   box-shadow:0 0 5px 5px rgba(0,0,0,0.1);
+  margin:0 auto;
+  overflow: hidden;
+  padding:2rem;
+  position: relative;
+  width:50rem;
+  z-index: 1;
 }
 
 h1 {
-  width:calc(100% + 4rem);
-  margin: -2rem 0 2rem -2rem;
-  padding:.5rem;
   background: #425e4f;
   border-bottom: 5px solid #425e4f;
-  text-align: center;
   font-size: 5rem;
   font-weight: 100;
   font-family: 'Pacifico', cursive;
+  margin: -2rem 0 2rem -2rem;
+  padding:.5rem;
+  text-align: center;
   text-shadow:3px 3px 0 #425e4f;
-
+  width:calc(100% + 4rem);
 }
 
 .voiceinator input,
 .voiceinator button,
 .voiceinator select,
 .voiceinator textarea {
-  width: 100%;
-  display: block;
-  margin:10px 0;
-  padding:10px;
-  border:0;
-  font-size: 2rem;
   background:#F7F7F7;
+  border:0;
+  display: block;
+  font-size: 2rem;
+  margin:10px 0;
   outline:0;
+  padding:10px;
+  width: 100%;
 }
 
 textarea {
@@ -77,14 +76,14 @@ input[type="select"] {
 .voiceinator button {
   background:#425e4f;
   border:0;
-  width: 49%;
-  float:left;
-  font-family: 'Pacifico', cursive;
-  margin-bottom: 0;
-  font-size: 2rem;
   border-bottom: 5px solid #425e4f;
   cursor:pointer;
+  float:left;
+  font-family: 'Pacifico', cursive;
+  font-size: 2rem;
+  margin-bottom: 0;
   position: relative;
+  width: 49%;
 }
 
 .voiceinator button:active {
@@ -107,7 +106,7 @@ a.home {
   text-align: center;
   text-decoration: none;
   top:0;
-  }
+}
 
 a.home:hover {
   background: rgba(66,94,79,0.9);

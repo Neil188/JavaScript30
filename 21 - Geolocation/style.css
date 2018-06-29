@@ -1,0 +1,99 @@
+html {
+    font-size: 50px;
+    min-width: 350px;
+    text-shadow: 0px 0px 5px white;
+}
+
+@media screen and (max-width: 750px) {
+    html {
+        font-size: 40px;
+    }
+}
+@media screen and (max-width: 600px) {
+    html {
+        font-size: 30px;
+    }
+}
+@media screen and (max-width: 350px) {
+    html {
+        font-size: 18px;
+    }
+}
+
+body {
+    align-items: center;
+    background:
+        radial-gradient(black 15%, transparent 16%) 0 0,
+        radial-gradient(black 15%, transparent 16%) 8px 8px,
+        radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
+        radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
+    background-color:#282828;
+    background-size:16px 16px;
+    background-attachment: fixed;
+    display:flex;
+    flex-direction: column;
+    font-family: sans-serif;
+    justify-content: center;
+    margin: 0;
+    min-height:100vh;
+}
+
+.hide {
+    display: none;
+}
+
+.arrow {
+    display: inline-block;
+    overflow: hidden;
+    transition: all 0.2s;
+    transform:rotate(0deg);
+    width:250px;
+}
+
+h1 {
+    align-items: center;
+    color:white;
+    display:flex;
+    font-weight: 100;
+    font-size: 60px;
+}
+
+.units {
+    font-size: 15px;
+}
+
+.compass {
+    text-align: center;
+    margin: 1rem;
+}
+
+.location-details {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 0 1rem;
+    text-align: center;
+}
+
+.location-details img {
+    margin: 1rem;
+}
+
+a.home {
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid black;
+    display: inline-block;
+    font-family: arial, sans-serif;
+    font-size: .4rem;
+    left:0;
+    padding: 10px;
+    position: absolute;
+    text-align: center;
+    text-decoration: none;
+    top:0;
+}
+
+a.home:hover {
+    background: rgba(66,94,79,0.9);
+}
+/*Compass: https://thenounproject.com/search/?q=compass&i=592352*/
