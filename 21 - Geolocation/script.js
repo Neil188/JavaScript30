@@ -19,7 +19,7 @@ const handleWatchPosition = ({
     locationText.textContent =
             `Latitude is ${latitude}° <br>Longitude is ${longitude}°`;
     const img = new Image();
-    img.src = `https://maps.googleapis.com/maps/api/staticmap?center=${latitude},${longitude}&zoom=13&size=300x300&sensor=false`;
+    img.src = `https://maps.googleapis.com/maps/api/staticmap?center=${latitude},${longitude}&zoom=13&size=300x300&sensor=false&key=AIzaSyCG2rERGcV3GqJPntdoCJgoOgKYQuPKeyI`;
 
     locationText.appendChild(img);
 };
