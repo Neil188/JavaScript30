@@ -67,6 +67,10 @@ h1 {
     margin: 1rem;
 }
 
+.loading {
+    text-align: center;
+}
+
 .location-details {
     align-items: center;
     display: flex;

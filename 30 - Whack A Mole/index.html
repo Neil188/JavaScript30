@@ -2,167 +2,55 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Whack A Mole!</title>
-  <link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Whack A Mole!</title>
+    <link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" async></script>
 </head>
 
 <body>
-  <a class="home" href="../index.html">Home</a>
-  <h1>Whack-a-mole!
-    <span class="score">0</span>
-  </h1>
-  <button onClick="startGame()">Start!</button>
+    <a class="home" href="../index.html">Home</a>
+    <div class="game">
+        <h1>Whack-a-mole!
+            <span class="score">0</span>
+        </h1>
+        <button onClick="startGame()">Start!</button>
 
-  <div class="game">
-    <div class="hole hole1">
-      <div class="mole"></div>
+        <div class="holes">
+            <div class="hole hole1">
+                <div class="mole"></div>
+            </div>
+            <div class="hole hole2">
+                <div class="mole"></div>
+            </div>
+            <div class="hole hole3">
+                <div class="mole"></div>
+            </div>
+            <div class="hole hole4">
+                <div class="mole"></div>
+            </div>
+            <div class="hole hole5">
+                <div class="mole"></div>
+            </div>
+            <div class="hole hole6">
+                <div class="mole"></div>
+            </div>
+        </div>
+
+
+        <h2>Top Scores</h2>
+        <table class="topscores">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>score</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
     </div>
-    <div class="hole hole2">
-      <div class="mole"></div>
-    </div>
-    <div class="hole hole3">
-      <div class="mole"></div>
-    </div>
-    <div class="hole hole4">
-      <div class="mole"></div>
-    </div>
-    <div class="hole hole5">
-      <div class="mole"></div>
-    </div>
-    <div class="hole hole6">
-      <div class="mole"></div>
-    </div>
-  </div>
 
-
-  <h2>Top Scores</h2>
-  <table class="topscores">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>score</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-
-
-  <script>
-    const holes = document.querySelectorAll('.hole');
-    const scoreBoard = document.querySelector('.score');
-    const title = document.querySelector('h1');
-    const moles = document.querySelectorAll('.mole');
-    const table = document.querySelector('.topscores');
-    let lastHole;
-    let timeUp = false;
-    let score = 0;
-    let topScores;
-
-    const getTopScores = () => {
-      const scores = JSON.parse(localStorage.getItem('top-scores'));
-      return (scores) ? scores : [];
-    }
-
-    const storeTopScores = (scores) =>
-      localStorage.setItem('top-scores', JSON.stringify(scores));
-
-    const randTime = (min, max) =>
-      Math.round(Math.random() * (max - min) + min);
-
-    const randHole = holes => {
-      const idx = Math.floor(Math.random() * holes.length);
-      const hole = holes[idx];
-      if (hole === lastHole) {
-        return randHole(holes);
-      }
-      lastHole = hole;
-      return hole;
-    };
-
-    const displayMole = () => {
-      const time = randTime(200, 1000);
-      const hole = randHole(holes);
-      hole.classList.add('up');
-      setTimeout(() => {
-        hole.classList.remove('up');
-        !timeUp && requestAnimationFrame(displayMole);
-      }, time);
-
-    };
-
-    const refreshTopScores = (scores) => {
-      const newTableBody = document.createElement("tbody");
-      const old = table.querySelector("tbody")
-      scores.forEach(x => {
-        const row = document.createElement("tr");
-        const name = document.createElement("td");
-        const nameContent = document.createTextNode(x.name);
-        name.appendChild(nameContent);
-        const score = document.createElement("td");
-        const scoreContent = document.createTextNode(x.score);
-        score.appendChild(scoreContent);
-        row.appendChild(name);
-        row.appendChild(score);
-        newTableBody.appendChild(row);
-      });
-      table.replaceChild(newTableBody, old);
-
-    }
-
-    const newTopScores = (topTen, current, name) => {
-      return [
-          ...topTen,
-          {
-            name,
-            score: current
-          }
-        ]
-        .sort((a, b) => b.score - a.score)
-        .slice(0, 10);
-    }
-
-    const endGame = () => {
-      timeUp = true;
-      title.classList.add('end');
-      if (score > 0 &&
-        (topScores.length < 10 || topScores[9].score < score)) {
-        const name = prompt('New Top score!  Enter name:') || 'Anonymous'
-        topScores = newTopScores(topScores, score, name);
-        storeTopScores(topScores);
-        refreshTopScores(topScores);
-      } else {
-        scoreBoard.classList.add('fail');
-      }
-    }
-
-    const startGame = () => {
-      score = 0;
-      scoreBoard.textContent = 0;
-      timeUp = false;
-      displayMole();
-      setTimeout(endGame, 10000);
-    };
-
-    const handleClick = e => {
-      if (!e.isTrusted) return;
-      !timeUp && score++;
-      scoreBoard.textContent = score;
-      e.target.parentElement.classList.remove('up');
-    }
-
-    const removeEnd = () => {
-      title.classList.remove('end');
-      scoreBoard.classList.remove('fail');
-    }
-
-    moles.forEach(mole =>
-      mole.addEventListener('click', handleClick));
-    title.addEventListener('transitionend', removeEnd);
-    topScores = getTopScores();
-    refreshTopScores(topScores);
-  </script>
 </body>
 
 </html>

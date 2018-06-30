@@ -26,6 +26,7 @@ a.home:hover {
 }
 
 .keys {
+    align-content: center;
     align-items: center;
     display: flex;
     flex: 1;

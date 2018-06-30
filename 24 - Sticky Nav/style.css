@@ -92,6 +92,7 @@ li.logo {
 /* Show logo */
 .fixed-nav li.logo {
   max-width: 500px;
+  min-width: 100px;
 }
 
 li.logo a {
@@ -123,4 +124,14 @@ a.home {
 
 a.home:hover {
   background: rgba(66,94,79,0.9);
+}
+
+@media screen and (max-width: 680px) {
+  nav {
+    font-size: 18px;
+  }
+
+  nav a {
+    padding:18px;
+  }
 }

@@ -18,12 +18,8 @@ body {
     linear-gradient(315deg, hsla(35, 95%, 55%, 1) 100%, hsla(35, 95%, 55%, 0) 70%);
 }
 
-h2 {
-    margin-top: 0;
-    padding-top: .8em;
-}
-
 nav {
+    margin-top: 20%;
     position: relative;
     perspective: 600px;
 }
@@ -112,8 +108,14 @@ nav ul {
 }
 
 .bio img {
-    float: left;
     margin-right: 20px;
+}
+
+@media screen and (max-width: 750px) {
+    .bio {
+        flex-direction: column;
+        min-width: auto;
+    }
 }
 
 .courses {

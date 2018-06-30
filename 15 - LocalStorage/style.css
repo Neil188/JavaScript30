@@ -63,7 +63,7 @@
     }
 
     .plates input + label:before {
-      content: '⬜️';
+      content: '☐';
       margin-right: 10px;
     }
 

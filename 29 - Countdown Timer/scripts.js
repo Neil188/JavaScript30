@@ -5,39 +5,15 @@ const buttons = document.querySelectorAll('[data-time]');
 let countdown;
 const leadingZeroes = num => num.toString().padStart(2,'0');
 
-const timer = seconds => {
-    // clear any existing timer
-    clearInterval(countdown);
-    timerDisplay.classList.remove('display__time-left--finished');
-
-    const now = Date.now();
-    const then = now + seconds * 1000;
-
-    displayTimeLeft(seconds);
-    displayEndTime(then);
-    
-    countdown = setInterval( () => {
-        const secondsLeft = Math.round((then - Date.now()) / 1000);
-        //exit condtion
-        if (secondsLeft < 0) {
-            clearInterval(countdown);
-            timerDisplay.classList.add('display__time-left--finished');
-            return;
-        }
-        displayTimeLeft(secondsLeft);
-    }, 1000);
-
-}
-
 const displayTimeLeft = (seconds) => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor(seconds / 60);
     const remainderSeconds = seconds % 60;
     const adjustedSeconds = leadingZeroes(remainderSeconds);
     const adjustedMinutes = leadingZeroes(minutes % 60);
-    const display = hours > 0 ? 
-          `${hours}:${adjustedMinutes}:${adjustedSeconds}`
-        : `${minutes}:${adjustedSeconds}`;
+    const display = hours > 0 ?
+        `${hours}:${adjustedMinutes}:${adjustedSeconds}` :
+        `${minutes}:${adjustedSeconds}`;
     timerDisplay.textContent = display;
     document.title = seconds <= 5 ? `* ${display} *` : display;
 }
@@ -53,17 +29,41 @@ const displayEndTime = timestamp => {
     endTime.textContent = `${endTime.dataset.mess} ${displayTime}`;
 }
 
+const timer = seconds => {
+    // clear any existing timer
+    clearInterval(countdown);
+    timerDisplay.classList.remove('display__time-left--finished');
+
+    const now = Date.now();
+    const then = now + seconds * 1000;
+
+    displayTimeLeft(seconds);
+    displayEndTime(then);
+
+    countdown = setInterval( () => {
+        const secondsLeft = Math.round((then - Date.now()) / 1000);
+        // exit condtion
+        if (secondsLeft < 0) {
+            clearInterval(countdown);
+            timerDisplay.classList.add('display__time-left--finished');
+            return;
+        }
+        displayTimeLeft(secondsLeft);
+    }, 1000);
+
+}
+
 // event handlers
 
-const startTimer = e => 
-    timer( parseInt(e.target.dataset.time) );
+const startTimer = e =>
+    timer( parseInt(e.target.dataset.time, 10) );
 
 const handleSubmit = e => {
     e.preventDefault();
     const mins = e.target.minutes.value;
     timer(mins * 60);
     e.target.reset();
-}
+};
 
 // event listeners
 buttons.forEach( button => button.addEventListener('click', startTimer) );

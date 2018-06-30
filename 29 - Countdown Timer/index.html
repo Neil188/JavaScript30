@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Countdown Timer</title>
-  <link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <a class="home" href="../index.html">Home</a>
-  <div class="timer">
-    <div class="timer__controls">
-      <button title="20 second timer" data-time="20" class="timer__button">20 Secs</button>
-      <button title="5 minute timer" data-time="300" class="timer__button">Work 5</button>
-      <button title="15 minute timer" data-time="900" class="timer__button">Quick 15</button>
-      <button title="20 minute timer" data-time="1200" class="timer__button">Snack 20</button>
-      <button title="1 hour timer" data-time="3600" class="timer__button">Lunch Break</button>
-      <form name="customForm" title="Enter custom timer" id="custom">
-        <input type="text" name="minutes" placeholder="Enter Minutes">
-      </form>
-    </div>
-    <div class="display">
-      <h1 class="display__time-left"></h1>
-      <p class="display__end-time"  data-mess="The world ends at" ></p>
-    </div>
-  </div>
 
-  <script src="scripts.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Countdown Timer</title>
+    <link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="style.css">
+    <script src="scripts.js" async></script>
+</head>
+
+<body>
+    <a class="home" href="../index.html">Home</a>
+    <div class="timer">
+        <div class="timer__controls">
+            <button title="20 second timer" data-time="20" class="timer__button">20 Secs</button>
+            <button title="5 minute timer" data-time="300" class="timer__button">Work 5</button>
+            <button title="15 minute timer" data-time="900" class="timer__button">Quick 15</button>
+            <button title="20 minute timer" data-time="1200" class="timer__button">Snack 20</button>
+            <button title="1 hour timer" data-time="3600" class="timer__button">Lunch Break</button>
+            <form name="customForm" title="Enter custom timer" id="custom">
+                <input type="text" name="minutes" placeholder="Enter Minutes">
+            </form>
+        </div>
+        <div class="display">
+            <h1 class="display__time-left"></h1>
+            <p class="display__end-time" data-mess="The world ends at"></p>
+        </div>
+    </div>
+
 </body>
+
 </html>

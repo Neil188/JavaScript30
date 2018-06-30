@@ -71,9 +71,27 @@ if (canvas.getContext) {
         [lastX, lastY] = [e.offsetX,e.offsetY];
     }
 
+    const handleTouchStart = e => {
+        e.preventDefault();
+        isDrawing = true;
+        const touch = e.changedTouches[0];
+        // get start position
+        [lastX, lastY] = [touch.pageX,touch.pageY];
+        console.log( lastX, lastY );
+    };
+
+    const handleTouchMove = e => {
+        const touch = e.changedTouches[0];
+        [e.offsetX,e.offsetY] = [touch.pageX,touch.pageY];
+        draw(e);
+    }
+
     canvas.addEventListener("mousedown", handleMouseDown);
     canvas.addEventListener("mousemove", draw);
     canvas.addEventListener("mouseup", () => isDrawing = false);
+    canvas.addEventListener("touchstart", handleTouchStart);
+    canvas.addEventListener("touchmove", handleTouchMove);
+    canvas.addEventListener("touchend", () => isDrawing = false);
     // check if mouse has left the canvas
     canvas.addEventListener("mouseout", () => isDrawing = false);
 } else {

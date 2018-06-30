@@ -17,7 +17,7 @@ header .banner {
     height: 40vw;
     background-repeat: no-repeat;
     background-size: cover;
-    transition: filter 3s ease-in;
+    transition: filter 2s ease-in;
 }
 
 header .initImage {
@@ -28,4 +28,8 @@ header .initImage {
 header .loaded {
     background-image: url("https://javascript30.com/images/JS3-social-share.png");
     filter: blur(0px);
+}
+
+ol {
+    line-height: 2rem;
 }
